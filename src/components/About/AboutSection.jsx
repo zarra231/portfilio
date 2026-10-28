@@ -5,7 +5,8 @@ import { FadeContent } from "../reactbits/FadeContent";
 import { GradualBlur } from "../reactbits/GradualBlur";
 
 export function AboutSection() {
-  const { education, stats, aboutStory } = personalData;
+  const { education, stats = [], aboutStory } = personalData;
+  const primaryEdu = Array.isArray(education) ? education[0] : (education || {});
 
   const strengths = [
     {
@@ -146,13 +147,13 @@ export function AboutSection() {
 
                 <div>
                   <h4 className="text-base font-bold text-white">
-                    {education.major}
+                    {primaryEdu.degree || primaryEdu.major || "Bachelor of Informatics Engineering"}
                   </h4>
                   <p className="text-xs text-slate-400 mt-1">
-                    {education.faculty} — {education.university}
+                    {primaryEdu.institution || "Universitas Ibn Khaldun Bogor"}
                   </p>
                   <p className="text-[11px] font-mono text-slate-500 mt-0.5">
-                    Periode: {education.year}
+                    Periode: {primaryEdu.period || primaryEdu.year || "2023 – Present"}
                   </p>
                 </div>
 
@@ -161,7 +162,7 @@ export function AboutSection() {
                     <Award className="w-4 h-4 text-amber-300" />
                     <span>Indeks Prestasi Kumulatif</span>
                   </div>
-                  <span className="text-teal-300 font-bold text-sm">{education.gpa} / 4.00</span>
+                  <span className="text-teal-300 font-bold text-sm">3.62 / 4.00</span>
                 </div>
 
                 <div className="text-[11px] text-slate-400 leading-relaxed">
